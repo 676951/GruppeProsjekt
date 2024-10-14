@@ -7,18 +7,27 @@ import no.hvl.dat100ptc.TODO;
 
 public class GPSUtils {
 
+	// a)
+	// Implementer metoden
+
+	// double findMin(double[] da)
+	// som finner minste tall i en tabell med flyttall. Det kan antas at der er
+	// minst et element i tabellen.
+	// Hint: se på implementasjonen av metoden findMax som allerede finnes i
+	// klassen.
+
 	public static double findMax(double[] da) {
 
-		double max; 
-		
+		double max;
+
 		max = da[0];
-		
+
 		for (double d : da) {
 			if (d > max) {
 				max = d;
 			}
 		}
-		
+
 		return max;
 	}
 
@@ -26,66 +35,112 @@ public class GPSUtils {
 
 		double min;
 
-		// TODO 
-		throw new UnsupportedOperationException(TODO.method());
-		
+		min = da[0];
+
+		for (double d : da) {
+			if (d < min) {
+				min = d;
+			}
+		}
+		return min;
+
 	}
+
+	// b)
+	// Implementer metoden
+	//
+	// public static double[] getLatitudes(GPSPoint[] gpspoints)
+	// som tar en tabell med GPS punkter som parameter og returnerer
+	// en tabell av desimaltall inneholdende breddegradene for GPS-punktene.
+	//
+	// Hint: metoden skal først opprette en tabell av desimaltall med samme lengde
+	// som gpspoints-tabellen og så kopiere de enkelte breddegrader over i den nye
+	// tabellen.
+	// Husk at getLatitude-metoden på et GPSPoint-objekt kan brukes til å lese ut
+	// breddegrad i et objekt.
 
 	public static double[] getLatitudes(GPSPoint[] gpspoints) {
 
-		throw new UnsupportedOperationException(TODO.method());
-		
-		// TODO
+		double[] latitudes = new double[gpspoints.length];
+
+		for (int i = 0; i < gpspoints.length; i++) {
+
+			latitudes[i] = gpspoints[i].getLatitude();
+		}
+
+		return latitudes;
 	}
 
 	public static double[] getLongitudes(GPSPoint[] gpspoints) {
 
-		
-		throw new UnsupportedOperationException(TODO.method());
-		
-		// TODO 
+		double[] longitudes = new double[gpspoints.length];
+
+		for (int i = 0; i < gpspoints.length; i++) {
+
+			longitudes[i] = gpspoints[i].getLongitude();
+		}
+
+		return longitudes;
 
 	}
+
+	// Oppgave D
+	// Beregner og returnerer avstanden d i meter mellom to GPS-punkt
 
 	private static final int R = 6371000; // jordens radius
 
 	public static double distance(GPSPoint gpspoint1, GPSPoint gpspoint2) {
 
 		double d;
-		double latitude1, longitude1, latitude2, longitude2;
 
-		throw new UnsupportedOperationException(TODO.method());
+		double latitude1 = Math.toRadians(gpspoint1.getLatitude());
+		double latitude2 = Math.toRadians(gpspoint2.getLatitude());
 
-		// TODO 
+		double longitude1 = Math.toRadians(gpspoint1.getLongitude());
+		double longitude2 = Math.toRadians(gpspoint2.getLongitude());
+
+		double deltaphi = latitude2-latitude1;
+		double deltadelta = longitude2-longitude1;
+		
+		double a = compute_a(latitude1, latitude2, deltaphi, deltadelta);
+		double c = compute_c(a);
+
+		d = R * c;
+		
+		return d;
+
 	}
-	
+
 	private static double compute_a(double phi1, double phi2, double deltaphi, double deltadelta) {
-	
-		throw new UnsupportedOperationException(TODO.method());
 		
-		// TODO 
+		return Math.pow(Math.sin(deltaphi / 2), 2)
+				+ Math.cos(phi1) * Math.cos(phi2) * Math.pow(Math.sin(deltadelta / 2), 2);
 
 	}
-
+	
 	private static double compute_c(double a) {
-
-		
-		throw new UnsupportedOperationException(TODO.method());
-		
-		
-		// TODO 
+		return 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 
 	}
-
 	
-	public static double speed(GPSPoint gpspoint1, GPSPoint gpspoint2) {
+		//	e)
+		//	Implementer metoden
+		//
+		//	public static double speed(GPSPoint gpspoint1, GPSPoint gpspoint2) {
+		//	som beregninger gjennomsnittshastighet i m/s om man beveger seg fra punktet gitt ved gpspoint1 til punktet gpspoint2.
+		//
+		//	Hint: Bruk metoden distance fra d) samt get-metode(r) på GPSPoint-objekt.
 
-		int secs;
-		double speed;
+	public static double speed(GPSPoint gpspoint1, GPSPoint gpspoint2) {
 		
-		throw new UnsupportedOperationException(TODO.method());
+		int secs = gpspoint2.getTime()-gpspoint1.getTime();
+		double dist = distance(gpspoint2,gpspoint1);
 		
-		// TODO
+		double speed = dist/secs;
+		
+		return speed;
+		
+	
 
 	}
 
@@ -95,21 +150,20 @@ public class GPSUtils {
 		String TIMESEP = ":";
 
 		throw new UnsupportedOperationException(TODO.method());
-		
-		// TODO 
-		
+
+		// TODO
+
 	}
-	
+
 	private static int TEXTWIDTH = 10;
 
 	public static String formatDouble(double d) {
 
 		String str;
 
-		
 		throw new UnsupportedOperationException(TODO.method());
-		
+
 		// TODO
-		
+
 	}
 }
