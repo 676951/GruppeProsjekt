@@ -8,41 +8,65 @@ public class GPSData {
 	private GPSPoint[] gpspoints;
 	protected int antall = 0;
 
-	public GPSData(int antall) {
+	// Gjør ferdig implementasjonen av følgende metoder:
 
-		throw new UnsupportedOperationException(TODO.method());
-		
-		// TODO
+	// public GPSData(int n) som er en konstruktør for klassen.
+	// Konstruktøren skal opprette en referansetabell av GPS punkter med størrelsen
+	// gitt ved parameteren n og sette gpspoints objektvariablen til å peke på denne
+	// tabelle.
+	// Videre skal metoden sette antall lik 0 (siden første element skal inn på
+	// posisjon 0).
+
+	public GPSData(int n) {
+
+		// Opprett en referansetabell av GPSPoint med størrelsen n
+		gpspoints = new GPSPoint[n];
+
+		// Sett antall til 0, siden ingen punkter er lagt inn ennå
+		antall = 0;
+
 	}
 
 	public GPSPoint[] getGPSPoints() {
 		return this.gpspoints;
 	}
-	
+
 	protected boolean insertGPS(GPSPoint gpspoint) {
 
 		boolean inserted = false;
-		
-		throw new UnsupportedOperationException(TODO.method());
-		
-		// TODO 
-	
+
+		if (antall < gpspoints.length) {
+
+			gpspoints[antall] = gpspoint;
+			antall++;
+			inserted = true;
+			
+		} else {
+			
+			inserted = false;
+			
+		}
+
+		return inserted;
+
 	}
 
 	public boolean insert(String time, String latitude, String longitude, String elevation) {
 
-		GPSPoint gpspoint;
+	    GPSPoint gpspoint = GPSDataConverter.convert(time, latitude, longitude, elevation);
+	    return insertGPS(gpspoint);
 
-		throw new UnsupportedOperationException(TODO.method());
-
-		// TODO 
-		
 	}
 
 	public void print() {
-
-		throw new UnsupportedOperationException(TODO.method());
-
-		// TODO 
+		
+	    System.out.println("====== GPS Data - START ======");
+	    
+	    for (int i = 0; i < antall; i++) {
+	        System.out.println((i + 1) + " " + gpspoints[i].toString());
+	    }
+	    
+	    System.out.println("====== GPS Data - SLUTT ======");
 	}
+
 }
