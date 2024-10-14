@@ -4,73 +4,109 @@ import no.hvl.dat100ptc.TODO;
 
 public class GPSPoint {
 
-	// TODO - objektvariable
+			//	a) Objektvariable og konstruktør
+			//	Se på start-koden for klassen GPSPoint.java i pakken no.hvl.dat100ptc.oppgave1.
+			//
+			//	Utvid startkoden for klassen slik klassen får følgende objektvariable:
+			//
+			//	time (heltall) som angir tiden i sekunder
+			//	latitude (desimaltall) som angir breddegrad
+			//	longitude (desimaltall) som angir lengdegrad
+			//	elevation (desimaltall) som angir høyde i meter
+				
+			//	Alle objektvariable skal være private dvs. kun synlige innenfor klassen.
+			//
+			//	Videre skal klassen ha en konstruktør
+			//
+			//	public GPSPoint(int time, double latitude, double longitude, double elevation)
+			//	som kan gi verdi til alle objektvariable.
+			//
+			//	Test implementasjonen ved å kjøre testene i test-klassen GPSPointTester.java.
+
+	// Objektvariabler
+	private int time;			// tid i sekunder
+	private double latitude;	// breddegrad
+	private double longitude;	// lengdegrad
+	private double elevation;	// høyde i meter
 	
+	// Kontstruktør
 	public GPSPoint(int time, double latitude, double longitude, double elevation) {
-
-		// TODO - konstruktur
-
-		throw new UnsupportedOperationException(TODO.construtor("GPSPoint"));
+		this.time = time;			// tid i sekunder
+		this.latitude = latitude;	// breddegrad
+		this.longitude = longitude;	// lengdegrad
+		this.elevation = elevation;	// høyde i meter
 		
 	}
-
-	// TODO - get/set metoder
+	
+			//	b) Hent/sett-metoder
+			//	Gjør ferdig implementasjonen av hent/sett (get/set)-metoder og test de med enhetstestene i test-klassen GPSPointTester.java.
+	
+	// Set- og get-metoder
 	public int getTime() {
 		
-		throw new UnsupportedOperationException(TODO.method());
+		return time;
 		
 	}
 
 	public void setTime(int time) {
 				
-		throw new UnsupportedOperationException(TODO.method());
+		this.time=time;
 		
 	}
 
 	public double getLatitude() {
 		
-		throw new UnsupportedOperationException(TODO.method());
+		return latitude;
 		
 		
 	}
 
 	public void setLatitude(double latitude) {
 		
-		throw new UnsupportedOperationException(TODO.method());
+		this.latitude=latitude;
 		
 	}
 
 	public double getLongitude() {
 		
-		throw new UnsupportedOperationException(TODO.method());
+		return longitude;
 		
 	}
 
 	public void setLongitude(double longitude) {
 		
-		throw new UnsupportedOperationException(TODO.method());
+		this.longitude=longitude;
 		
 	}
 
 	public double getElevation() {
 		
-		throw new UnsupportedOperationException(TODO.method());
+		return elevation;
 		
 	}
 
 	public void setElevation(double elevation) {
 		
-		throw new UnsupportedOperationException(TODO.method());
+		this.elevation=elevation;
 		
 	}
 	
+			//	c) Representasjon som tekststreng
+			//	Gjør ferdig implementasjonen av toString()-metoden som returnerer en strengrepresentasjon av et GPSPoint-objekt på formen:
+			//
+			//	"1 (2.0,3.0) 5.0\n"
+			//
+			//	der 1 er tiden, (2.0,3.0) er (breddegrad,lengdegrad) og 5.0 er høyden.
+			//
+			//	Test implementasjonen ved å bruke enhetstestene i test-klassen GPSPointTester.java.
+//	
 	public String toString() {
 		
-		String str;
+		String str = "";
 		
-		throw new UnsupportedOperationException(TODO.method());
+		str += time + " (" + latitude + "," + longitude + ") " + elevation + "\n";
 
-		// TODO
+		return str;
 		
 	}
 }
