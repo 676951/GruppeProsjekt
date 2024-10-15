@@ -1,7 +1,6 @@
 package no.hvl.dat100ptc.oppgave3;
 
 import static java.lang.Math.*;
-import java.util.Locale;
 
 import no.hvl.dat100ptc.oppgave1.GPSPoint;
 import no.hvl.dat100ptc.TODO;
@@ -164,7 +163,7 @@ public class GPSUtils {
 
 	public static String formatDouble(double d) {
 
-		String str = String.format(Locale.US, "%.02f", d); // Tar inn double parameter, forkorter til 2 desimaler / float
+		String str = String.format("%.02f", d); // Tar inn double parameter, forkorter til 2 desimaler / float
 		
 		str = String.format("%" + TEXTWIDTH + "s", str); // setter lengden til 10, s=string, % = formatering
 		
