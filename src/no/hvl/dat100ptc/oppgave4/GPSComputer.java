@@ -97,16 +97,15 @@ public class GPSComputer {
 	public double averageSpeed() {
 
 		double totalSpeed = 0;
-	    for (int i = 0; i < gpspoints.length - 1; i++) {
-	        double speed = GPSUtils.speed(gpspoints[i], gpspoints[i + 1]);
-	        totalSpeed += speed;
-	    }
+		for (int i = 0; i < gpspoints.length - 1; i++) {
+			double speed = GPSUtils.speed(gpspoints[i], gpspoints[i + 1]);
+			totalSpeed += speed;
+		}
 
-	    double averageSpeed = totalSpeed / (gpspoints.length - 1.5);
+		double averageSpeed = totalSpeed / (gpspoints.length - 1.5);
 
-	    return averageSpeed;
+		return averageSpeed;
 	}
-	
 
 	// conversion factor m/s to miles per hour (mps)
 	public static final double MS = 2.23;
@@ -120,35 +119,52 @@ public class GPSComputer {
 
 		if (speedmph < 10) {
 			met = 4.0;
-			} else if (speedmph < 12) {
-				met = 6.0;
-			} else if (speedmph < 14) {
-				met = 8.0;
-			} else if (speedmph < 16) {
-				met = 10;
-			} else if (speedmph < 20) {
-				met = 12;
-			} else {
-				met = 16;
-			}
-		double timeHours = secs / 3600; 
-		
+		} else if (speedmph < 12) {
+			met = 6.0;
+		} else if (speedmph < 14) {
+			met = 8.0;
+		} else if (speedmph < 16) {
+			met = 10;
+		} else if (speedmph < 20) {
+			met = 12;
+		} else {
+			met = 16;
+		}
+		double timeHours = secs / 3600;
+
 		kcal = met * weight * timeHours;
-		
+
 		return kcal;
+
+	}
+
+	public double totalKcal (double weight) {
+		 if (gpspoints == null || gpspoints.length < 2) {
+		        return 0;
+		    }
+
+		    double totalKcal = 0; 
+
+		    
+		    for (int i = 0; i < gpspoints.length - 1; i++) {
+		        
+		        int timeSecs = gpspoints[i + 1].getTime() - gpspoints[i].getTime();
+
+		        
+		        if (timeSecs > 0) {
+		           
+		            double speed = GPSUtils.distance(gpspoints[i], gpspoints[i + 1]) / timeSecs; 
+
+		            
+		            totalKcal += kcal(weight, timeSecs, speed);
+		        }
+		    }
+		    return totalKcal;
 		
 	}
+		   	  
 
-
-	public double totalKcal(double weight) {
-
-		double totalkcal = 0;
-
-
-	}
-
-	private static double WEIGHT = 80.0;
-
+	
 	public void displayStatistics() {
 
 		// TODO
