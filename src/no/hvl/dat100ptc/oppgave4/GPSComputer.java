@@ -119,10 +119,27 @@ public class GPSComputer {
 		double met = 0;
 		double speedmph = speed * MS;
 
-		// TODO
-		throw new UnsupportedOperationException(TODO.method());
-
+		if (speedmph < 10) {
+			met = 4.0;
+			} else if (speedmph < 12) {
+				met = 6.0;
+			} else if (speedmph < 14) {
+				met = 8.0;
+			} else if (speedmph < 16) {
+				met = 10;
+			} else if (speedmph < 20) {
+				met = 12;
+			} else {
+				met = 16;
+			}
+		double timeHours = secs / 3600; 
+		
+		kcal = met * weight * timeHours;
+		
+		return kcal;
+		
 	}
+
 
 	public double totalKcal(double weight) {
 
