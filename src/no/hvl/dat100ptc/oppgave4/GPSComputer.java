@@ -67,8 +67,22 @@ public class GPSComputer {
 			totalTime += time2-time1;
 		}
 
+<<<<<<< Updated upstream
 		return totalTime;
 		
+=======
+		int totalTime = 0;
+		
+		for (int i = 0; i < gpspoints.length -1; i++) {
+			int timeDifference = gpspoints[i +1].getTime() - gpspoints[i].getTime();
+			if (timeDifference > 0) {
+				totalTime += timeDifference;
+			}
+		}
+		return totalTime;
+		
+
+>>>>>>> Stashed changes
 	}
 	
 			//	d)
@@ -87,20 +101,31 @@ public class GPSComputer {
 		
 	    for (int i = 0; i < gpspoints.length - 1; i++) {
 
+<<<<<<< Updated upstream
 	        speeds[i] = GPSUtils.speed(gpspoints[i], gpspoints[i + 1]);
 	    }
+=======
+		
+>>>>>>> Stashed changes
 
 	    return speeds;
 	}
 
 	public double maxSpeed() {
 
-		double maxspeed = 0;
+		double maxSpeed = 0;
 
-		// TODO
-		throw new UnsupportedOperationException(TODO.method());
+    for (int i = 0; i < gpspoints.length - 1; i++) {
+        double speed = GPSUtils.speed(gpspoints[i], gpspoints[i + 1]);
+        if (speed > maxSpeed) {
+            maxSpeed = speed;
+        }
+    }
 
-	}
+    return maxSpeed;
+}
+
+
 
 	public double averageSpeed() {
 
