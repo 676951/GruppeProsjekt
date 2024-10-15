@@ -96,7 +96,9 @@ public class GPSComputer {
 	}
 
 	public double averageSpeed() {
+
 		return totalDistance() / totalTime();
+
 	}
 
 	// conversion factor m/s to miles per hour (mps)
@@ -122,6 +124,7 @@ public class GPSComputer {
 		} else {
 			met = 16;
 		}
+
 		double timeHours = secs / 3600.00;
 
 		kcal = met * weight * timeHours;
@@ -136,30 +139,21 @@ public class GPSComputer {
 		}
 
 		double totalKcal = 0;
-		
+
 		for (int i = 0; i < gpspoints.length - 1; i++) {
 			int timeSecs = gpspoints[i + 1].getTime() - gpspoints[i].getTime();
 
 			double speed = GPSUtils.speed(gpspoints[i], gpspoints[i + 1]);
-			
+
 			totalKcal += kcal(weight, timeSecs, speed);
 
 		}
-		
+
 		return totalKcal;
 
 	}
-	
-	private static double WEIGHT = 80.0;
 
-//			==============================================
-//				Total Time     :   00:36:35
-//				Total distance :      13.74 km
-//				Total elevation:     210.60 m
-//				Max speed      :      47.98 km/t
-//				Average speed  :      22.54 km/t
-//				Energy         :     744.40 kcal
-//			==============================================
+	private static double WEIGHT = 80.0;
 
 	public void displayStatistics() {
 
