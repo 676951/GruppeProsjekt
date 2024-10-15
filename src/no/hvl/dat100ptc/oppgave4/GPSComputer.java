@@ -147,22 +147,19 @@ public class GPSComputer {
 
 		    
 		    for (int i = 0; i < gpspoints.length - 1; i++) {
-		        
 		        int timeSecs = gpspoints[i + 1].getTime() - gpspoints[i].getTime();
-
+		        
 		        
 		        if (timeSecs > 0) {
-		           
 		            double speed = GPSUtils.distance(gpspoints[i], gpspoints[i + 1]) / timeSecs; 
-
-		            
 		            totalKcal += kcal(weight, timeSecs, speed);
 		        }
 		    }
 		    return totalKcal;
 		
 	}
-		   	  
+		   	   
+	private static double WEIGHT = 80.0;
 
 	
 	public void displayStatistics() {
