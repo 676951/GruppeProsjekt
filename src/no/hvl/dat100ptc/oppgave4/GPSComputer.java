@@ -6,6 +6,8 @@ import no.hvl.dat100ptc.oppgave2.GPSDataConverter;
 import no.hvl.dat100ptc.oppgave2.GPSDataFileReader;
 import no.hvl.dat100ptc.oppgave3.GPSUtils;
 
+import static java.lang.Math.toRadians;
+
 import no.hvl.dat100ptc.TODO;
 
 public class GPSComputer {
@@ -30,28 +32,46 @@ public class GPSComputer {
 	public double totalDistance() {
 
 		double totalDistance = 0;
-
+		
 		for (int i = 0; i < gpspoints.length - 1; i++) {
 			double distance = GPSUtils.distance(gpspoints[i], gpspoints[i + 1]);
 			totalDistance += distance;
 		}
 
 		return totalDistance;
+		
 	}
 
 	public double totalElevation() {
 
-		double elevation = 0;
+		double elevationDistance = 0;
 		
 		
+		for (int i = 0; i < gpspoints.length - 1; i++) {
+	        double elevation1 = gpspoints[i].getElevation();
+	        double elevation2 = gpspoints[i + 1].getElevation();
+	        
+	        if (elevation2 > elevation1) {
+	            elevationDistance += elevation2 - elevation1;
+	        }
+	    }
 
+	    return elevationDistance;
+		
 	}
 
 	public int totalTime() {
+		
+		int totalTime = 0;
+		
+		for (int i = 0; i < gpspoints.length - 1; i++) {
+			int time1 = gpspoints[i].getTime();
+			int time2 = gpspoints[i+1].getTime();
+			totalTime += time2-time1;
+		}
 
-		// TODO
-		throw new UnsupportedOperationException(TODO.method());
-
+		return totalTime;
+		
 	}
 
 	public double[] speeds() {

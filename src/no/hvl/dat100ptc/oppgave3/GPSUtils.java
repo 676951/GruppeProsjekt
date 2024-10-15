@@ -94,11 +94,11 @@ public class GPSUtils {
 
 		double d;
 
-		double latitude1 = Math.toRadians(gpspoint1.getLatitude());
-		double latitude2 = Math.toRadians(gpspoint2.getLatitude());
+		double latitude1 = toRadians(gpspoint1.getLatitude());
+		double latitude2 = toRadians(gpspoint2.getLatitude());
 
-		double longitude1 = Math.toRadians(gpspoint1.getLongitude());
-		double longitude2 = Math.toRadians(gpspoint2.getLongitude());
+		double longitude1 = toRadians(gpspoint1.getLongitude());
+		double longitude2 = toRadians(gpspoint2.getLongitude());
 
 		double deltaphi = latitude2-latitude1;
 		double deltadelta = longitude2-longitude1;
@@ -114,13 +114,13 @@ public class GPSUtils {
 
 	private static double compute_a(double phi1, double phi2, double deltaphi, double deltadelta) {
 		
-		return Math.pow(Math.sin(deltaphi / 2), 2)
-				+ Math.cos(phi1) * Math.cos(phi2) * Math.pow(Math.sin(deltadelta / 2), 2);
+		return pow(sin(deltaphi / 2), 2)
+				+ cos(phi1) * cos(phi2) * pow(Math.sin(deltadelta / 2), 2);
 
 	}
 	
 	private static double compute_c(double a) {
-		return 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+		return 2 * atan2(sqrt(a), sqrt(1 - a));
 
 	}
 	
