@@ -44,8 +44,7 @@ public class GPSComputer {
 
 	public double totalElevation() {
 
-
-		double elevationDistance = 0;
+		double totalElevation = 0;
 		
 		
 		for (int i = 0; i < gpspoints.length -1; i++) {
@@ -71,14 +70,27 @@ public class GPSComputer {
 		return totalTime;
 		
 	}
+	
+			//	d)
+			//	Implementer metoden
+			//
+			//	public double[] speeds()
+			//	som skal returnere en tabell med gjennomsnitshastigheter målt i m/s mellom hver av de punktene 
+			//	vi har beveget oss mellom. 
+			//	Dvs. første inngang i tabellen skal være hastigheten vi beveget oss med mellom punkt 0 og punkt 1, 
+			//	andre inngang hastigheten mellom punkt 1 og 2 osv. 
+			//	Hvis antall GPS datapunker er N da vil lengden av den tabellen som returneres være N-1.
 
 	public double[] speeds() {
 
 		double[] speeds = new double[gpspoints.length - 1];
+		
+	    for (int i = 0; i < gpspoints.length - 1; i++) {
 
-		// TODO
-		throw new UnsupportedOperationException(TODO.method());
+	        speeds[i] = GPSUtils.speed(gpspoints[i], gpspoints[i + 1]);
+	    }
 
+	    return speeds;
 	}
 
 	public double maxSpeed() {
