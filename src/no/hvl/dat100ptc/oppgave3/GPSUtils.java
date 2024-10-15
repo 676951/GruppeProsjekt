@@ -148,22 +148,26 @@ public class GPSUtils {
 
 		String timestr;
 		String TIMESEP = ":";
+		
+		int hours = secs / 3600;
+		int minutes= (secs % 3600) /60;
+		int seconds= secs % 60;
 
-		throw new UnsupportedOperationException(TODO.method());
-
-		// TODO
-
+		timestr = String.format("%02d%s%02d%s%02d", hours, TIMESEP, minutes, TIMESEP, seconds); // setter formatet hh:mm:ss
+		
+		return String.format("%10s", timestr); // setter lengden til 10
+	
 	}
 
 	private static int TEXTWIDTH = 10;
 
 	public static String formatDouble(double d) {
 
-		String str;
-
-		throw new UnsupportedOperationException(TODO.method());
-
-		// TODO
+		String str = String.format("%.2f", d); // Tar inn double parameter, forkorter til 2 desimaler
+		
+		str = String.format("%10s", str); // setter lengden til 10
+		
+		return str;
 
 	}
 }
