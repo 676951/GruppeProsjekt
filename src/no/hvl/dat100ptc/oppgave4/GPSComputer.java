@@ -96,12 +96,18 @@ public class GPSComputer {
 
 	public double averageSpeed() {
 
-		double average = 0;
+		    double totalSpeed = 0;
 
-		// TODO
-		throw new UnsupportedOperationException(TODO.method());
+		    for (int i = 0; i < gpspoints.length - 1; i++) {
+		        double speed = GPSUtils.speed(gpspoints[i], gpspoints[i + 1]);
+		        totalSpeed += speed;
+		    }
 
-	}
+		    double averageSpeed = totalSpeed / (gpspoints.length - 1.5);
+
+		    return averageSpeed;
+		}
+
 
 	// conversion factor m/s to miles per hour (mps)
 	public static final double MS = 2.23;
@@ -135,5 +141,6 @@ public class GPSComputer {
 		throw new UnsupportedOperationException(TODO.method());
 
 	}
-
 }
+
+
