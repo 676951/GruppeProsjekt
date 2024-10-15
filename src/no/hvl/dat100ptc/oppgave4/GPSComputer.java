@@ -44,20 +44,18 @@ public class GPSComputer {
 
 	public double totalElevation() {
 
+
 		double elevationDistance = 0;
 		
 		
-		for (int i = 0; i < gpspoints.length - 1; i++) {
-	        double elevation1 = gpspoints[i].getElevation();
-	        double elevation2 = gpspoints[i + 1].getElevation();
-	        
-	        if (elevation2 > elevation1) {
-	            elevationDistance += elevation2 - elevation1;
-	        }
-	    }
+		for (int i = 0; i < gpspoints.length -1; i++) {
+			double elevationDifference = gpspoints[i +1].getElevation() - gpspoints[i].getElevation();
+			if (elevationDifference > 0) {
+				totalElevation += elevationDifference;
+			}
+		}
+			return totalElevation;
 
-	    return elevationDistance;
-		
 	}
 
 	public int totalTime() {
