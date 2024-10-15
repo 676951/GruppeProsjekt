@@ -4,6 +4,7 @@ import static java.lang.Math.*;
 
 import no.hvl.dat100ptc.oppgave1.GPSPoint;
 import no.hvl.dat100ptc.TODO;
+import java.util.Locale;
 
 public class GPSUtils {
 
@@ -155,7 +156,7 @@ public class GPSUtils {
 
 		timestr = String.format("%02d%s%02d%s%02d", hours, TIMESEP, minutes, TIMESEP, seconds); // setter formatet hh:mm:ss
 		
-		return timestr;
+		return String.format("%10s", timestr); // setter lengden til 10;
 	
 	}
 
@@ -163,7 +164,7 @@ public class GPSUtils {
 
 	public static String formatDouble(double d) {
 
-		String str = String.format("%.02f", d); // Tar inn double parameter, forkorter til 2 desimaler / float
+		String str = String.format(Locale.US,"%.02f", d); // Tar inn double parameter, forkorter til 2 desimaler / float
 		
 		str = String.format("%" + TEXTWIDTH + "s", str); // setter lengden til 10, s=string, % = formatering
 		
