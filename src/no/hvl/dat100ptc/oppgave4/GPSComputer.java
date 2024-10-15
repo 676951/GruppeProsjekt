@@ -2,11 +2,10 @@ package no.hvl.dat100ptc.oppgave4;
 
 import no.hvl.dat100ptc.oppgave1.GPSPoint;
 import no.hvl.dat100ptc.oppgave2.GPSData;
-import no.hvl.dat100ptc.oppgave2.GPSDataConverter;
 import no.hvl.dat100ptc.oppgave2.GPSDataFileReader;
 import no.hvl.dat100ptc.oppgave3.GPSUtils;
 
-import static java.lang.Math.toRadians;
+import java.util.stream.DoubleStream;
 
 import no.hvl.dat100ptc.TODO;
 
@@ -75,6 +74,7 @@ public class GPSComputer {
 		for (int i = 0; i < gpspoints.length - 1; i++) {
 
 			speeds[i] = GPSUtils.speed(gpspoints[i], gpspoints[i + 1]);
+
 		}
 
 		return speeds;
@@ -83,24 +83,20 @@ public class GPSComputer {
 	public double maxSpeed() {
 
 		double maxSpeed = 0;
+		double[] speeds = speeds();
 
-		for (int i = 0; i < gpspoints.length - 1; i++) {
-			double speed = GPSUtils.speed(gpspoints[i], gpspoints[i + 1]);
-			if (speed > maxSpeed) {
-				maxSpeed = speed;
+		for (int i = 0; i < speeds.length; i++) {
+			if (speeds[i] > maxSpeed) {
+				maxSpeed = speeds[i];
 			}
 		}
 
 		return maxSpeed;
+
 	}
 
 	public double averageSpeed() {
-
-		double average = 0;
-
-		// TODO
-		throw new UnsupportedOperationException(TODO.method());
-
+		return totalDistance() / totalTime();
 	}
 
 	// conversion factor m/s to miles per hour (mps)
@@ -113,27 +109,83 @@ public class GPSComputer {
 		double met = 0;
 		double speedmph = speed * MS;
 
-		// TODO
-		throw new UnsupportedOperationException(TODO.method());
+		if (speedmph < 10) {
+			met = 4.0;
+		} else if (speedmph < 12) {
+			met = 6.0;
+		} else if (speedmph < 14) {
+			met = 8.0;
+		} else if (speedmph < 16) {
+			met = 10;
+		} else if (speedmph < 20) {
+			met = 12;
+		} else {
+			met = 16;
+		}
+		double timeHours = secs / 3600.00;
+
+		kcal = met * weight * timeHours;
+
+		return kcal;
 
 	}
 
 	public double totalKcal(double weight) {
+		if (gpspoints == null || gpspoints.length < 2) {
+			return 0;
+		}
 
-		double totalkcal = 0;
+		double totalKcal = 0;
+		
+		for (int i = 0; i < gpspoints.length - 1; i++) {
+			int timeSecs = gpspoints[i + 1].getTime() - gpspoints[i].getTime();
 
-		// TODO
-		throw new UnsupportedOperationException(TODO.method());
+			double speed = GPSUtils.speed(gpspoints[i], gpspoints[i + 1]);
+			
+			totalKcal += kcal(weight, timeSecs, speed);
+
+		}
+		
+		return totalKcal;
 
 	}
-
+	
 	private static double WEIGHT = 80.0;
+
+//			==============================================
+//				Total Time     :   00:36:35
+//				Total distance :      13.74 km
+//				Total elevation:     210.60 m
+//				Max speed      :      47.98 km/t
+//				Average speed  :      22.54 km/t
+//				Energy         :     744.40 kcal
+//			==============================================
 
 	public void displayStatistics() {
 
-		// TODO
-		throw new UnsupportedOperationException(TODO.method());
+		String utskrift = "";
+		System.out.println("==============================================");
 
+		int totaltime = totalTime();
+		utskrift += "Total Time\t:\t" + GPSUtils.formatTime(totaltime) + "\n";
+
+		double distance = totalDistance();
+		utskrift += "Total distance\t:\t" + String.format("%.2f", distance) + "km\n";
+
+		double elevation = totalElevation();
+		utskrift += "Total elevation\t:\t" + String.format("%.2f", elevation) + "\tm\n";
+
+		double maxspeed = maxSpeed();
+		utskrift += "Max speed\t:\t" + String.format("%.2f", maxspeed) + "\tkm/t\n";
+
+		double avspeed = averageSpeed();
+		utskrift += "Average speed\t:\t" + String.format("%.2f", avspeed) + "\tkm/t\n";
+
+		double energy = totalKcal(WEIGHT);
+		utskrift += "Energy\t\t:\t" + String.format("%.2f", energy) + "\tkcal";
+
+		System.out.println(utskrift);
+		System.out.println("==============================================");
 	}
 
 }

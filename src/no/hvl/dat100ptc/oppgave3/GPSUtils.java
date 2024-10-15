@@ -134,15 +134,15 @@ public class GPSUtils {
 	public static double speed(GPSPoint gpspoint1, GPSPoint gpspoint2) {
 		
 		int secs = gpspoint2.getTime()-gpspoint1.getTime();
-		double dist = distance(gpspoint2,gpspoint1);
 		
-		double speed = dist/secs;
-		
-		return speed;
-		
-	
+	    double dist = distance(gpspoint1, gpspoint2);
 
+	    double speed = dist / secs;
+
+	    return speed;
 	}
+		
+
 
 	public static String formatTime(int secs) {
 
@@ -155,7 +155,7 @@ public class GPSUtils {
 
 		timestr = String.format("%02d%s%02d%s%02d", hours, TIMESEP, minutes, TIMESEP, seconds); // setter formatet hh:mm:ss
 		
-		return String.format("%10s", timestr); // setter lengden til 10
+		return timestr;
 	
 	}
 
