@@ -163,9 +163,9 @@ public class GPSUtils {
 
 	public static String formatDouble(double d) {
 
-		String str = String.format("%.2f", d); // Tar inn double parameter, forkorter til 2 desimaler
+		String str = String.format("%.02f", d); // Tar inn double parameter, forkorter til 2 desimaler / float
 		
-		str = String.format("%10s", str); // setter lengden til 10
+		str = String.format("%" + TEXTWIDTH + "s", str); // setter lengden til 10, s=string, % = formatering
 		
 		return str;
 
